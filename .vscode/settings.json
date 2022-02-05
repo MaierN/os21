@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "util.h": "c",
+        "stdint.h": "c",
+        "stddef.h": "c",
+        "shell.h": "c",
+        "display.h": "c",
+        "taskmgr.h": "c",
+        "help.h": "c"
+    }
+}
