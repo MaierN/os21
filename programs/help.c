@@ -30,6 +30,7 @@ void program_help_init() {
             description++;
         }
 
+        help_line[line_i] = 0;
         display_ln(help_line);
     }
     display_ln("");
