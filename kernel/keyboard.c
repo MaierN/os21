@@ -10,6 +10,7 @@ const char scancodes[] = {'?', 0x1b, '1', '2', '3', '4', '5', '6',
                          'b', 'n', 'm', ',', '.', '/', '?', '?', '?', ' '};
 
 char last_letter = 0;
+bool first_time = true;
 
 static void interrupt_handler(interrupt_registers_t *r) {
     (void)r;
@@ -25,6 +26,11 @@ void keyboard_init() {
 }
 
 bool keyboard_read(char *letter) {
+    if (first_time) {
+        first_time = false;
+        last_letter = 0;
+    }
+
     if (last_letter == 0) return false;
     *letter = last_letter;
     last_letter = 0;
