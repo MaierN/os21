@@ -1,10 +1,13 @@
 #include "display.h"
 #include "util.h"
+#include "color.h"
 
 #define DISPLAY_PTR 0xb8000
 
-#define GET_DISPLAY_BUFFER(c, r) (*(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r)))
-#define SET_DISPLAY_BUFFER(c, r, val) *(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r)) = val
+#define GET_DISPLAY_CHAR(c, r) (*(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r)))
+#define SET_DISPLAY_CHAR(c, r, val) (*(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r)) = (val))
+#define GET_DISPLAY_COLOR(c, r, val) (*(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r) + 1))
+#define SET_DISPLAY_COLOR(c, r, val) (*(uint8_t*)(DISPLAY_PTR + 2 * (c) + 2 * DISPLAY_WIDTH * (r) + 1) = (val))
 
 void display_init() {
     util_out(0x3D4, 0x0A);
@@ -25,13 +28,13 @@ void display_char(char c) {
         cursor_pos_x = 0;
         for (size_t row = 0; row < DISPLAY_HEIGHT; row++) {
             for (size_t col = 0; col < DISPLAY_WIDTH; col++) {
-                if (row < DISPLAY_HEIGHT - 1) SET_DISPLAY_BUFFER(col, row, GET_DISPLAY_BUFFER(col, row + 1));
-                else SET_DISPLAY_BUFFER(col, row, 0x00);
+                if (row < DISPLAY_HEIGHT - 1) SET_DISPLAY_CHAR(col, row, GET_DISPLAY_CHAR(col, row + 1));
+                else SET_DISPLAY_CHAR(col, row, 0x00);
             }
         }
     }
     if (c != '\n') {
-        SET_DISPLAY_BUFFER(cursor_pos_x++, DISPLAY_HEIGHT - 1, c);
+        SET_DISPLAY_CHAR(cursor_pos_x++, DISPLAY_HEIGHT - 1, c);
     }
 }
 
@@ -62,7 +65,8 @@ void display_ln(char *str) {
 void display_clear() {
     for (size_t col = 0; col < DISPLAY_WIDTH; col++) {
         for (size_t row = 0; row < DISPLAY_HEIGHT; row++) {
-            SET_DISPLAY_BUFFER(col, row, 0x00);
+            SET_DISPLAY_CHAR(col, row, 0x00);
+            SET_DISPLAY_COLOR(col, row, COLOR_WHITE_ON_BLACK);
         }
     }
 }
@@ -70,13 +74,14 @@ void display_clear() {
 void display_set_line(char *str, size_t row) {
     size_t i = 0;
     for (; i < DISPLAY_WIDTH && str[i] != 0; i++) {
-        SET_DISPLAY_BUFFER(i, row, str[i]);
+        SET_DISPLAY_CHAR(i, row, str[i]);
     }
     for (; i < DISPLAY_WIDTH; i++) {
-        SET_DISPLAY_BUFFER(i, row, 0x00);
+        SET_DISPLAY_CHAR(i, row, 0x00);
     }
 }
 
-void display_set_char(size_t col, size_t row, char c) {
-    SET_DISPLAY_BUFFER(col, row, c);
+void display_set_char(size_t col, size_t row, char c, uint8_t color_char, uint8_t color_bg) {
+    SET_DISPLAY_CHAR(col, row, c);
+    SET_DISPLAY_COLOR(col, row, (color_bg << 4) | color_char);
 }
