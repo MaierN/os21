@@ -1,9 +1,9 @@
 
-build/os15.bin: build/boot.bin build/kernel.bin
+build/os21.bin: build/boot.bin build/kernel.bin
 	cat $^ > $@
 	dd if=/dev/zero of=$@ bs=1 count=0 seek=16384 status=none
-	cp build/os15.bin build/os15bochs.bin
-	dd if=/dev/zero of=build/os15bochs.bin bs=1 count=0 seek=10321920 status=none
+	cp build/os21.bin build/os21bochs.bin
+	dd if=/dev/zero of=build/os21bochs.bin bs=1 count=0 seek=10321920 status=none
 
 build/kernel.bin: link.ld build/entry.o build_kernel build_programs
 	ld -m elf_i386 -o $@ -T link.ld build/entry.o $(wildcard build/kernel/*.o $(wildcard build/programs/*.o)) --oformat binary
@@ -20,7 +20,7 @@ build_programs: $(wildcard programs/*.c) $(wildcard programs/*.h) |build
 build/boot.bin: boot.asm |build
 	nasm $< -f bin -o $@
 
-run: build/os15.bin
+run: build/os21.bin
 	qemu-system-x86_64 -drive file=$<,format=raw
 
 build:

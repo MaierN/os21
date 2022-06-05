@@ -76,3 +76,7 @@ void display_set_line(char *str, size_t row) {
         SET_DISPLAY_BUFFER(i, row, 0x00);
     }
 }
+
+void display_set_char(size_t col, size_t row, char c) {
+    SET_DISPLAY_BUFFER(col, row, c);
+}

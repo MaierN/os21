@@ -3,6 +3,7 @@
 
 #include "display.h"
 #include "interrupt.h"
+#include "time.h"
 #include "keyboard.h"
 #include "taskmgr.h"
 
@@ -12,6 +13,7 @@ void main() {
     display_init();
     display_clear();
     interrupt_init();
+    time_init();
     keyboard_init();
     asm volatile("sti");
 

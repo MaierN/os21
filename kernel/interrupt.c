@@ -76,7 +76,7 @@ void isr_handler(interrupt_registers_t *r) {
 void irq_handler(interrupt_registers_t *r) {
     if (interrupt_handlers[r->err_code] != 0) {
         interrupt_handlers[r->err_code](r);
-        if (r->err_code != 1) {
+        if (r->err_code != 1 && r->err_code != 0) {
             display_ln("");
             display_str("calling interrupt handler");
             display_ln("");

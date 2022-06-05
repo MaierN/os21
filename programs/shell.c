@@ -25,15 +25,15 @@ void program_shell_init() {
     if (full_init) {
         display_clear();
 
-        // https://patorjk.com/software/taag/#p=display&f=Big%20Money-ne&t=OS%2015
-        display_ln("  /$$$$$$   /$$$$$$          /$$   /$$$$$$$ ");
-        display_ln(" /$$__  $$ /$$__  $$       /$$$$  | $$____/ ");
-        display_ln("| $$  \\ $$| $$  \\__/      |_  $$  | $$      ");
-        display_ln("| $$  | $$|  $$$$$$         | $$  | $$$$$$$ ");
-        display_ln("| $$  | $$ \\____  $$        | $$  |_____  $$");
-        display_ln("| $$  | $$ /$$  \\ $$        | $$   /$$  \\ $$");
-        display_ln("|  $$$$$$/|  $$$$$$/       /$$$$$$|  $$$$$$/");
-        display_ln(" \\______/  \\______/       |______/ \\______/ ");
+        // https://patorjk.com/software/taag/#p=display&f=Big%20Money-ne&t=OS%2021
+        display_ln("  /$$$$$$   /$$$$$$         /$$$$$$    /$$  ");
+        display_ln(" /$$__  $$ /$$__  $$       /$$__  $$ /$$$$  ");
+        display_ln("| $$  \\ $$| $$  \\__/      |__/  \\ $$|_  $$  ");
+        display_ln("| $$  | $$|  $$$$$$         /$$$$$$/  | $$  ");
+        display_ln("| $$  | $$ \\____  $$       /$$____/   | $$  ");
+        display_ln("| $$  | $$ /$$  \\ $$      | $$        | $$  ");
+        display_ln("|  $$$$$$/|  $$$$$$/      | $$$$$$$$ /$$$$$$");
+        display_ln(" \\______/  \\______/       |________/|______/");
 
         display_ln("\n\n\nWelcome to the shell!\n\ntype \"help\" for a list of commands");
     }

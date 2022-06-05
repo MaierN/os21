@@ -32,7 +32,6 @@ void program_help_init() {
 
         display_ln(help_line);
     }
-    display_hex((uint8_t*)&interrupt_error_count, 4);
     display_ln("");
     taskmgr_run_program(&program_shell);
 }

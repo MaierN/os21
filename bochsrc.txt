@@ -1,7 +1,7 @@
 megs:            2048
 romimage: file=$BXSHARE/BIOS-bochs-latest
 vgaromimage: file=$BXSHARE/VGABIOS-lgpl-latest
-ata0-master:     type=disk, path=build/os15bochs.bin, mode=flat, cylinders=20, heads=16, spt=63
+ata0-master:     type=disk, path=build/os21bochs.bin, mode=flat, cylinders=20, heads=16, spt=63
 boot:            disk
 log:             build/bochslog.txt
 clock:           sync=realtime, time0=local

@@ -11,7 +11,7 @@ const char scancodes[] = {'?', 0x1b, '1', '2', '3', '4', '5', '6',
 
 char last_letter = 0;
 
-void interrupt_handler(interrupt_registers_t *r) {
+static void interrupt_handler(interrupt_registers_t *r) {
     (void)r;
 
     uint8_t scancode = util_in(0x60);

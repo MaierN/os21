@@ -15,5 +15,6 @@ void display_ln(char *str);
 void display_str(char *str);
 void display_clear();
 void display_set_line(char *str, size_t row);
+void display_set_char(size_t col, size_t row, char c);
 
 #endif
